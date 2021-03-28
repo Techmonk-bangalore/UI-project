@@ -9,10 +9,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { VoteComponent } from './vote/vote.component';
 import { AdminComponent } from './admin/admin.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, VoteComponent,AdminComponent],
+  declarations: [AppComponent, LoginComponent, VoteComponent,AdminComponent, SignupComponent],
   imports: [BrowserModule, HttpClientModule, ChartsModule, AppRoutingModule],
   providers: [PusherService],
   bootstrap: [AppComponent],
