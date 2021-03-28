@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PusherService } from './pusher.service';
 import { HttpClient } from '@angular/common/http';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-vote',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VoteComponent implements OnInit {
 
-  constructor(private pusher: PusherService, private http: HttpClient) {}
+  constructor(private pusher: PusherService, private http: HttpClient,private service: ServiceService) {}
 
   event = 'vote';
   vote = '';
@@ -59,17 +60,29 @@ export class VoteComponent implements OnInit {
   chartData: number[] = Object.values(this.voteCount);
   chartType = 'doughnut';
 
+
+  
   castVote(player) {
-    this.http
-      .post('http://localhost:4000/vote', { player })
-      .subscribe((res: any) => {
-        this.vote = res.player;
+    this.service.post(player).subscribe((response:any) => {
+      if(response){
+        this.vote = response.player;
         if(this.vote){
           this.voteCount[ this.vote] += 1;
           this.chartData = Object.values(this.voteCount);
         }
         this.voted = true;
-      });
+      }
+      })
+    // this.http
+    //   .post('/vote', { player })
+    //   .subscribe((res: any) => {
+    //     this.vote = res.player;
+    //     if(this.vote){
+    //       this.voteCount[ this.vote] += 1;
+    //       this.chartData = Object.values(this.voteCount);
+    //     }
+    //     this.voted = true;
+    //   });
   }
 
   getVoteClasses(player) {
