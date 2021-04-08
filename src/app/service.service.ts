@@ -10,8 +10,13 @@ export class ServiceService {
 
   constructor(private http: HttpClient) { }
 
-  post(data): Observable<HttpResponse<any>> {
-    return this.http.post<any>(baseUrl+'/vote', data);
+  login(data): Observable<HttpResponse<any>> {
+    return this.http.post<any>(baseUrl+'/api/login/userLogin', data);
+}
+  vote(data): Observable<HttpResponse<any>> {
+    console.log(data);
+    
+  return this.http.put<any>(baseUrl+'/api/vote/updateCandidate', data);
 }
 
 }

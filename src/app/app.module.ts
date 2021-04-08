@@ -11,11 +11,16 @@ import { VoteComponent } from './vote/vote.component';
 import { AdminComponent } from './admin/admin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ServiceService } from './service.service';
+import { FormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, VoteComponent,AdminComponent, SignupComponent],
-  imports: [BrowserModule, HttpClientModule, ChartsModule, AppRoutingModule],
+  imports: [BrowserModule,FormsModule, HttpClientModule, ChartsModule, AppRoutingModule,BrowserAnimationsModule,
+    ToastrModule.forRoot()],
   providers: [PusherService, ServiceService],
   bootstrap: [AppComponent],
 })

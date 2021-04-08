@@ -2,49 +2,54 @@ import { Component, OnInit } from '@angular/core';
 import { PusherService } from './pusher.service';
 import { HttpClient } from '@angular/common/http';
 import { ServiceService } from '../service.service';
+import { ToastrService } from 'ngx-toastr';
+import { Injectable } from '@angular/core';
+
 
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
   styleUrls: ['./vote.component.scss']
 })
+
+@Injectable()
 export class VoteComponent implements OnInit {
 
-  constructor(private pusher: PusherService, private http: HttpClient,private service: ServiceService) {}
+  constructor(private pusher: PusherService, private http: HttpClient,private service: ServiceService,private toastr: ToastrService) {}
 
   event = 'vote';
   vote = '';
   voted = false;
   playerData = [
     {
-      name: 'Mo. Salah',
+      firstName: 'Mo. Salah',
       goals: 30,
       assists: 12,
-      shortName: 'salah',
+      name: 'salah',
       image:
         'https://platform-static-files.s3.amazonaws.com/premierleague/photos/players/250x250/p118748.png',
     },
     {
-      name: 'Christian Eriksen',
+      firstName: 'Christian Eriksen',
       goals: 8,
       assists: 13,
-      shortName: 'eriksen',
+      name: 'eriksen',
       image:
         'https://platform-static-files.s3.amazonaws.com/premierleague/photos/players/250x250/p80607.png',
     },
     {
-      name: 'Harry Kane',
+      firstName: 'Harry Kane',
       goals: 26,
       assists: 5,
-      shortName: 'kane',
+      name: 'kane',
       image:
         'https://platform-static-files.s3.amazonaws.com/premierleague/photos/players/40x40/p78830.png',
     },
     {
-      name: "Kevin De'bruyne",
+      firstName: "Kevin De'bruyne",
       goals: 10,
       assists: 17,
-      shortName: 'kevin',
+      name: 'kevin',
       image:
         'https://platform-static-files.s3.amazonaws.com/premierleague/photos/players/40x40/p61366.png',
     },
@@ -63,12 +68,13 @@ export class VoteComponent implements OnInit {
 
   
   castVote(player) {
-    this.service.post(player).subscribe((response:any) => {
+    this.service.vote(player).subscribe((response:any) => {
       if(response){
         this.vote = response.player;
         if(this.vote){
           this.voteCount[ this.vote] += 1;
           this.chartData = Object.values(this.voteCount);
+          this.toastr.success("You casted your vote")
         }
         this.voted = true;
       }
@@ -93,11 +99,11 @@ export class VoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    const channel = this.pusher.init();
-    channel.bind('vote', ({ player }) => {
-      this.voteCount[player] += 1;
-      this.chartData = Object.values(this.voteCount);
-    });
+    // const channel = this.pusher.init();
+    // channel.bind('vote', ({ player }) => {
+    //   this.voteCount[player] += 1;
+    //   this.chartData = Object.values(this.voteCount);
+    // });
   }
 
 }
