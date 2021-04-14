@@ -12,9 +12,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,private apiServices: ServiceService) { }
   user: any = {};
+ 
   ngOnInit() {
+    this.user.admin = false;
   }
-  login(form: NgForm) {
+  login(form: NgForm) {    
     if (!form.valid) {
       return;
     }
@@ -25,8 +27,14 @@ export class LoginComponent implements OnInit {
       password: password,
     };
     this.apiServices.login(data).subscribe((response) => {
+      console.log(response);
         if(response){
-          this.router.navigate(['../vote']);
+          if(this.user.admin ==false){
+            this.router.navigate(['../vote']);
+
+          }else{
+          this.router.navigate(['../admin']);
+          }
         }
 
     }, (error) => {

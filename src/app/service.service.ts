@@ -19,4 +19,8 @@ export class ServiceService {
   return this.http.put<any>(baseUrl+'/api/vote/updateCandidate', data);
 }
 
+getVoteResults(): Observable<HttpResponse<any>> {
+  return this.http.get<any>(baseUrl+'/api/vote/getResults');
+}
+
 }

@@ -17,7 +17,11 @@
     <!-- <div class="login-form"> -->
 			<div class="sign-in-htm">
 				<div class="group">
-				    <h3 style="color:white"> <b>Voter Login </b></h3>
+					<input type="checkbox" class="check" id="admin" name="admin" [(ngModel)]="user.admin" checked >
+					<label for="admin"><span class="icon"></span> Login as Admin</label>
+				</div>
+				<div class="group">
+				    <h3 style="color:white"><b>Voter Login</b></h3>
 					<label for="user" class="label">Username</label>
 					<input id="username" type="text" class="input" name="username" [(ngModel)]="user.username">
 				</div>
@@ -25,9 +29,9 @@
 					<label for="pass" class="label">Password</label>
 					<input id="pass" type="password" class="input" name="password" data-type="password" [(ngModel)]="user.password">
 				</div>
+				
 				<div class="group">
-					<input id="check" type="checkbox" class="check" checked>
-					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+					<input type="submit" class="button" value="Sign In">
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Sign In" (click)="login(loginForm)">

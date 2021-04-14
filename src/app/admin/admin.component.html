@@ -1,3 +1,10 @@
-<p>
-  admin works!
-</p>
+
+<div class="chart-box" *ngIf="isDataAvailable">
+  <h2 style="text-align: center;">Voting results</h2>
+  <canvas baseChart
+      [data]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"></canvas>
+</div>
