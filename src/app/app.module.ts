@@ -14,13 +14,12 @@ import { ServiceService } from './service.service';
 import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, VoteComponent,AdminComponent, SignupComponent],
-  imports: [BrowserModule,FormsModule, HttpClientModule, ChartsModule, AppRoutingModule,BrowserAnimationsModule,
-    ToastrModule.forRoot()],
+  imports: [BrowserModule,FormsModule, HttpClientModule, ChartsModule, AppRoutingModule,BrowserAnimationsModule],
   providers: [PusherService, ServiceService],
   bootstrap: [AppComponent],
 })

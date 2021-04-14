@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PusherService } from './pusher.service';
 import { HttpClient } from '@angular/common/http';
 import { ServiceService } from '../service.service';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
 
 
@@ -15,7 +15,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class VoteComponent implements OnInit {
 
-  constructor(private pusher: PusherService, private http: HttpClient,private service: ServiceService,private toastr: ToastrService) {}
+  constructor(private pusher: PusherService, private http: HttpClient,private service: ServiceService) {}
 
   event = 'vote';
   vote = '';
@@ -74,7 +74,7 @@ export class VoteComponent implements OnInit {
         if(this.vote){
           this.voteCount[ this.vote] += 1;
           this.chartData = Object.values(this.voteCount);
-          this.toastr.success("You casted your vote")
+          // this.toastr.success("You casted your vote")
         }
         this.voted = true;
       }
